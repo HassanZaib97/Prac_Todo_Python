@@ -1,4 +1,4 @@
-# test_app.py
+# streamlit_client.py
 import streamlit as st
 import requests
 
@@ -21,18 +21,20 @@ def main():
 
     # Test Create Todo
     st.header("Create Todo")
-    new_todo_text = st.text_input("Enter Todo Text:")
+    new_todo_title = st.text_input("Enter Todo Title:")
+    new_todo_description = st.text_input("Enter Todo Description:")
     if st.button("Create Todo"):
-        if new_todo_text:
-            create_todo(new_todo_text)
+        if new_todo_title and new_todo_description:
+            create_todo(new_todo_title, new_todo_description)
 
     # Test Update Todo
     st.header("Update Todo")
     update_todo_id = st.text_input("Enter Todo ID to Update:")
-    updated_text = st.text_input("Enter Updated Todo Text:")
+    updated_title = st.text_input("Enter Updated Todo Title:")
+    updated_description = st.text_input("Enter Updated Todo Description:")
     if st.button("Update Todo"):
-        if update_todo_id and updated_text:
-            update_todo(int(update_todo_id), updated_text)
+        if update_todo_id and updated_title and updated_description:
+            update_todo(int(update_todo_id), updated_title, updated_description)
 
     # Test Delete Todo
     st.header("Delete Todo")
@@ -49,13 +51,13 @@ def get_all_todos():
     response = requests.get(f"{BASE_URL}/todos/")
     display_response(response)
 
-def create_todo(todo_text):
-    payload = {"text": todo_text}
+def create_todo(title, description):
+    payload = {"title": title, "description": description}
     response = requests.post(f"{BASE_URL}/todos/", json=payload)
     display_response(response)
 
-def update_todo(todo_id, updated_text):
-    payload = {"text": updated_text}
+def update_todo(todo_id, title, description):
+    payload = {"title": title, "description": description}
     response = requests.put(f"{BASE_URL}/todos/{todo_id}", json=payload)
     display_response(response)
 

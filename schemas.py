@@ -2,11 +2,15 @@ from pydantic import BaseModel
 
 
 class TodoCreate(BaseModel):
-    text:  str
+    title:  str
+    description: str
 
 class TodoUpdate(BaseModel):
-    text: str
+    title:  str
+    description: str
 
 
 class TodoDelete(BaseModel):
     id: int
+
+

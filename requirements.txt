@@ -7,3 +7,5 @@ requests
 streamlit
 python-dotenv
 types-requests
+jose
+types-python-jose
